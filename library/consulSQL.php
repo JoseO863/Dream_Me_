@@ -2,42 +2,39 @@
 /* Clase para ejecutar las consultas a la Base de Datos*/
 class ejecutarSQL{
     
-    private static function conectar(){        
-        $conn = mysqli_init();
-        mysqli_ssl_set($conn, NULL, NULL, SSL, NULL, NULL);
-        mysqli_real_connect($conn, SERVER, USER, PASS, BD, 3306, NULL, MYSQLI_CLIENT_SSL);
-        if ($conn->connect_error) {
-            die('Error de Conexión (' . $conn->connect_errno . ') ' . $conn->connect_error);
-        }
-        return $conn;        
-    }
-    public static function consultar($query){
-        if (!$consul = mysqli_query(ejecutarSQL::conectar(), $query)) {
-            echo 'Error en la consulta SQL ejecutada';
-        }
-        return $consul;
-    }
-    // public static function conectar(){
-    //     if (!$conn =  mysqli_real_connect(SERVER, USER, BD, PASS)) {
-    //         $conn = mysqli_init();
-    //         mysqli_ssl_set($conn, NULL, NULL, "../assets/img/DigiCertGlobalRootCA.crt.pem", NULL, NULL);
-    //         mysqli_real_connect($conn, 'srvdreamme.mysql.database.azure.com', 'Administrador', 'Azure.comsrv', 'store', 3306, MYSQLI_CLIENT_SSL);
-    //         if (mysqli_connect_errno()) {
-    //             die('Failed to connect to MySQL: ' . mysqli_connect_error());
-    //         }
+    // private static function conectar(){        
+    //     $conn = mysqli_init();
+    //     mysqli_ssl_set($conn, NULL, NULL, SSL, NULL, NULL);
+    //     mysqli_real_connect($conn, SERVER, USER, PASS, BD, 3306, NULL, MYSQLI_CLIENT_SSL);
+    //     if ($conn->connect_error) {
+    //         die('Error de Conexión (' . $conn->connect_errno . ') ' . $conn->connect_error);
     //     }
-
-    //     /* Codificar la información de la base de datos a UTF8*/
-    //     mysqli_set_charset($conn, "utf8");
-    //     return $conn;
+    //     return $conn;        
     // }
-
     // public static function consultar($query){
     //     if (!$consul = mysqli_query(ejecutarSQL::conectar(), $query)) {
     //         echo 'Error en la consulta SQL ejecutada';
     //     }
     //     return $consul;
     // }
+    public static function conectar(){
+        if (!$conn =  mysqli_real_connect(SERVER, USER, BD, PASS)) {
+            if (mysqli_connect_errno()) {
+                die('Failed to connect to MySQL: ' . mysqli_connect_error());
+            }
+        }
+
+        /* Codificar la información de la base de datos a UTF8*/
+        mysqli_set_charset($conn, "utf8");
+        return $conn;
+    }
+
+    public static function consultar($query){
+        if (!$consul = mysqli_query(ejecutarSQL::conectar(), $query)) {
+            echo 'Error en la consulta SQL ejecutada';
+        }
+        return $consul;
+    }
 }
 /* Clase para hacer las consultas Insertar, Eliminar y Actualizar */
 class consultasSQL
