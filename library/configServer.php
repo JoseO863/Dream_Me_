@@ -1,6 +1,6 @@
 <?php
-define("SERVER", "dbservermysqli.mysql.database.azure.com");
-define("USER", "albeiro_admin");
+define("SERVER", "bddreamme.mysql.database.azure.com");
+define("USER", "joseAdmin");
 define("BD", "store");
-define("PASS", "Earv1234");
+define("PASS", "BdlostDream01");
 define("SSL", "DigiCertGlobalRootCA.crt.pem");
